@@ -1,4 +1,5 @@
 resource "kubernetes_namespace" "metallb" {
+  count = var.enable_metallb ? 1 : 0
   metadata {
     name = "metallb-system"
     labels = {
@@ -10,6 +11,7 @@ resource "kubernetes_namespace" "metallb" {
 }
 
 resource "helm_release" "metallb" {
+  count = var.enable_metallb ? 1 : 0
   depends_on = [kubernetes_namespace.metallb]
   name       = "metallb"
   chart      = "metallb"
@@ -20,6 +22,7 @@ resource "helm_release" "metallb" {
 }
 
 resource "kubernetes_manifest" "metallb_pool" {
+  count = var.enable_metallb ? 1 : 0
   manifest = {
     "apiVersion" = "metallb.io/v1beta1"
     "kind"       = "IPAddressPool"
@@ -35,6 +38,7 @@ resource "kubernetes_manifest" "metallb_pool" {
 }
 
 resource "kubernetes_manifest" "metallb_l2_advert" {
+  count = var.enable_metallb ? 1 : 0
   manifest = {
     "apiVersion" = "metallb.io/v1beta1"
     "kind" = "L2Advertisement"

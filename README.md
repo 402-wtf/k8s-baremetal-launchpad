@@ -2,6 +2,13 @@
 
 This repo provides the base configuration for a cluster using Talos Linux and Sidero Metal on on-prem hardware.
 
+This project is setup to optionally install:
+
+* ArgoCD
+* MetalLB
+* Traefik
+* ExternalDNS
+
 ## Assumptions
 
 * We assume the Kubernetes cluster has been setup outside of this setup.

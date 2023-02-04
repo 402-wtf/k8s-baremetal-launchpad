@@ -1,10 +1,12 @@
 resource "kubernetes_namespace" "argocd" {
+  count = var.enable_argo ? 1 : 0
   metadata {
     name = "argocd"
   }
 }
 
 resource "helm_release" "argocd" {
+  count = var.enable_argo ? 1 : 0
   depends_on = [kubernetes_namespace.argocd]
   name       = "argocd"
   chart      = "argo-cd"
