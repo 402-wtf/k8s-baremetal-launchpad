@@ -13,6 +13,7 @@ resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   namespace  = "argocd"
   version    = "5.19.12"
+  timeout    = 600
 
   set {
     name  = "server.service.annotations.external-dns\\.alpha\\.kubernetes\\.io/hostname"
@@ -52,11 +53,6 @@ resource "helm_release" "argocd" {
   set {
     name  = "applicationSet.replicaCount"
     value = "2"
-  }
-
-  set {
-    name  = "server.service.type"
-    value = "NodePort"
   }
 
   set {
