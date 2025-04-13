@@ -6,7 +6,7 @@ resource "kubernetes_namespace" "traefik" {
 }
 
 resource "helm_release" "traefik" {
-  count = var.enable_traefik ? 1 : 0
+  count      = var.enable_traefik ? 1 : 0
   depends_on = [kubernetes_namespace.traefik]
   name       = "traefik"
   chart      = "traefik"

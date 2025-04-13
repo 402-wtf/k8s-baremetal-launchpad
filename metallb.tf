@@ -3,15 +3,15 @@ resource "kubernetes_namespace" "metallb" {
   metadata {
     name = "metallb-system"
     labels = {
-      "pod-security.kubernetes.io/audit" = "privileged"
+      "pod-security.kubernetes.io/audit"   = "privileged"
       "pod-security.kubernetes.io/enforce" = "privileged"
-      "pod-security.kubernetes.io/warn" = "privileged"
+      "pod-security.kubernetes.io/warn"    = "privileged"
     }
   }
 }
 
 resource "helm_release" "metallb" {
-  count = var.enable_metallb ? 1 : 0
+  count      = var.enable_metallb ? 1 : 0
   depends_on = [kubernetes_namespace.metallb]
   name       = "metallb"
   chart      = "metallb"
@@ -32,7 +32,7 @@ resource "kubernetes_manifest" "metallb_pool" {
     }
     "spec" = {
       "addresses" = var.metallb_ip_range
-      autoAssign = true
+      autoAssign  = true
     }
   }
 }
@@ -41,9 +41,9 @@ resource "kubernetes_manifest" "metallb_l2_advert" {
   count = var.enable_metallb ? 1 : 0
   manifest = {
     "apiVersion" = "metallb.io/v1beta1"
-    "kind" = "L2Advertisement"
+    "kind"       = "L2Advertisement"
     metadata = {
-      "name" = "l2adv"
+      "name"      = "l2adv"
       "namespace" = kubernetes_namespace.metallb[0].metadata[0].name
     }
   }
