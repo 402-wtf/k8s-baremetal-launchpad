@@ -7,7 +7,6 @@ This project is setup to optionally install:
 * ArgoCD
 * MetalLB
 * Traefik
-* ExternalDNS
 
 ## Assumptions
 

@@ -12,7 +12,7 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd"
   repository = "https://argoproj.github.io/argo-helm"
   namespace  = "argocd"
-  version    = "5.19.12"
+  version    = "7.8.23"
   timeout    = 600
 
   set {
